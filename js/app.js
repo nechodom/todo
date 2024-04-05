@@ -1,4 +1,4 @@
-let form = document.getElementById("form");
+let form = document.querySelector("form");
 let inputText = document.querySelector("inputText");
 let add = document.querySelector("submit");
 
@@ -19,7 +19,7 @@ let formValidation = () => {
     console.log("error!");
     msg.innerHTML = "Text nemůže být prázdný!";
   } else {
-    console.log("Successly added new task!");
+    console.log("Úspěšně přidán nový task!");
     msg.innerHTML = "";
     acceptData();
     add.click();
