@@ -1,13 +1,8 @@
 let form = document.querySelector("form");
-let inputText = document.querySelector("inputText");
-let add = document.querySelector("submit");
-
-let checkIfFoundElements = () => {
-  let inputText = document.querySelector("inputText");
-  if (inputText) {
-    console.log("Našel jsem element inputText!");
-  }
-};
+let inputText = document.querySelector("#inputText");
+let add = document.querySelector("#submit");
+let msg = "";
+let data = [];
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -15,20 +10,19 @@ form.addEventListener("submit", (e) => {
 });
 
 let formValidation = () => {
-  if (textInput.value === "") {
+  if (inputText.value === "") {
     console.log("error!");
     msg.innerHTML = "Text nemůže být prázdný!";
   } else {
     console.log("Úspěšně přidán nový task!");
     msg.innerHTML = "";
     acceptData();
-    add.click();
   }
 };
 
 let acceptData = () => {
   data.push({
-    text: textInput.value,
+    text: inputText.value,
   });
 
   localStorage.setItem("data", JSON.stringify(data));
@@ -38,9 +32,9 @@ let acceptData = () => {
 };
 
 let createTask = (e) => {
-  tasks.innerHTML = "";
+  text.innerHTML = "";
   data.map((x, y) => {
-    return (tasks.innerHTML += `
+    return (text.innerHTML += `
         <div class="todo-card">
         <h2 id="text">${x.text}</h2>
         <button>Upravit</button>
