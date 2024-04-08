@@ -1,50 +1,51 @@
-let form = document.querySelector("form");
-let inputText = document.querySelector("#inputText");
-let add = document.querySelector("#submit");
-let msg = "";
-let data = [];
+/**
+ * TODO:
+ * - [ ] dopsat create task
+ * - [ ] ziskavat data z locale storage a vlozit do data[]
+ * - [ ] udelat popup s informaci o vytvoreni/chybach tasku
+ */
+
+const form = document.querySelector("form");
+const inputText = document.querySelector("#inputText");
+const add = document.querySelector("#submit");
+const data = [];
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  formValidation();
+  addTodo();
 });
 
-let formValidation = () => {
-  if (inputText.value === "") {
-    console.log("error!");
-    msg.innerHTML = "Text nemůže být prázdný!";
-  } else {
-    console.log("Úspěšně přidán nový task!");
-    msg.innerHTML = "";
-    acceptData();
-  }
-};
+function addTodo() {
+	// declare vars
 
-let acceptData = () => {
+	// validation
+	if (inputText.value === "") {
+		console.error("error!");
+		return;
+	} else {
+		console.log("Úspěšně přidán nový task!");
+	}
+
+	// process data
   data.push({
     text: inputText.value,
   });
-
   localStorage.setItem("data", JSON.stringify(data));
 
-  console.log("data");
-  createTask();
-};
+	// create task
+  const template = `
+    <div class="todo-card">
+      <h2 id="text">${data[0].text}</h2>
+      <button>Upravit</button>
+      <button>Smazat</button>
+    </div>
+  `;
 
-let createTask = (e) => {
-  text.innerHTML = "";
-  data.map((x, y) => {
-    return (text.innerHTML += `
-        <div class="todo-card">
-        <h2 id="text">${x.text}</h2>
-        <button>Upravit</button>
-        <button>Smazat</button>
-      </div>
-        `);
-  });
-  resetForm();
-};
+	// check
+	console.log("data", data)
+	console.log("template", template)
 
-let resetForm = () => {
-  textInput.value = "";
-};
+	// reset form
+  inputText.value = "";
+}
+
