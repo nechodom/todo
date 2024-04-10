@@ -51,8 +51,13 @@ function addTodo() {
 }
 
 function printTodo() {
-  //get data from localstorage and show it in todos
-  const data = JSON.parse(localStorage.getItem("data"));
+  // take data from local storage and add them to data[]
+  const dataFromLocalStorage = JSON.parse(localStorage.getItem("data"));
+  dataFromLocalStorage.forEach((item) => {
+    data.push(item);
+  });
+
+  // print all todos
   data.forEach((item) => {
     todos.innerHTML += `
     <div class="todo-card">
