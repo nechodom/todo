@@ -33,10 +33,11 @@ function addTodo() {
   localStorage.setItem("data", JSON.stringify(data));
 
   // create task
-  let len = data.length - 1;
+  // get last item from data and add them to todos
+  const lastItem = data[data.length - 1];
   todos.innerHTML += `
     <div class="todo-card">
-      <h2 id="text">${data[len].text}</h2>
+      <h2 id="text">${lastItem.text}</h2>
       <button>Upravit</button>
       <button>Smazat</button>
     </div>
@@ -50,20 +51,16 @@ function addTodo() {
 }
 
 function printTodo() {
-  let localData = localStorage.getItem("data");
-  const obj = JSON.parse(localStorage.getItem("data"));
-  if (localData) {
-    for (let i = 0; i < obj.length; i++) {
-      todos.innerHTML += `
-        <div class="todo-card">
-          <h2 id="text">${obj[i].text}</h2>
-          <button>Upravit</button>
-          <button>Smazat</button>
-        </div>
-      `;
-    }
-  } else {
-    return;
-  }
+  //get data from localstorage and show it in todos
+  const data = JSON.parse(localStorage.getItem("data"));
+  data.forEach((item) => {
+    todos.innerHTML += `
+    <div class="todo-card">
+      <h2 id="text">${item.text}</h2>
+      <button>Upravit</button>
+      <button>Smazat</button>
+    </div>
+  `;
+  });
 }
 printTodo();
